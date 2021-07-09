@@ -1,0 +1,73 @@
+openapi: '3.0.2'
+info:
+  title: EIDO Dereference Factory and EIDO Retrieval Service 
+  version: '1.0'
+servers:
+  - url: 'https://localhost/IncidentData/v1'
+paths:
+  /references/{incidentID}:
+    get:
+      parameters:
+        - in: path
+          name: incidentID
+          required: true
+          schema:
+            type: string
+          description: The incident ID
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+                description: Opaque dereference Service URI for the incident. 
+                format: uri
+        '404':
+          description: Not found
+        '403':
+          description: Forbidden
+        '406':
+          description: Not Acceptable
+                
+  /incidents/{incidentID}:
+    parameters:
+    - in: path
+      name: incidentID
+      required: true
+      schema:
+        type: string
+      description: The incident ID
+    get:
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                description: EIDO representing the state of the incident 
+        '404':
+          description: Not found
+        '403':
+          description: Forbidden
+        '406':
+          description: Not Acceptable
+  /Versions:
+    servers:
+      - url: 'https://api.example.com/TestCall'
+      - description: Override base path for Versions query
+    get:
+      tags:
+        - RetrieveVersions
+      summary: Retrieves all supported versions, vendor parameter is optional.
+      operationId: RetrieveVersions
+      responses:
+        '200':
+          description: Versions found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'i3-common.yaml#/components/schemas/VersionsArray'
