@@ -3,7 +3,7 @@ info:
   title: EIDO Conveyance Subscribe and Notify schema
   version: '1.0'
 servers:
-  url: http://localhost/IncidentData
+  - url: http://localhost/IncidentData
 paths:
   /object:
     get:
@@ -52,6 +52,7 @@ components:
       oneOf:
         - $ref: '#/components/schemas/subscribeResponseObject'
         - $ref: '#/components/schemas/unsubscribeResponseObject'
+        - $ref: '#/components/schemas/responseObject'
         - $ref: '#/components/schemas/eventObject'
 
     subscribeObject:
@@ -150,7 +151,27 @@ components:
             statusText:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
-
+    
+    responseObject:
+      type: object
+      properties:
+        response:
+          type: object
+          required:
+            - statusCode
+            - statusText
+          properties:
+            requestId:
+              type: string
+              description: The ID provided by the subscriber.
+            statusCode:
+              type: integer
+              enum: 
+                - 501
+            statusText:
+              type: string
+              enum: 
+                - "Not implemented"
     eventObject:
       type: object
       properties:
