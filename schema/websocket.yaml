@@ -7,6 +7,7 @@ servers:
 paths:
   /ent:
     get:
+      description: Stub to keep OpenAPI happy, not to be used. These objects are exchanged over a WebSocket as documented in NENA-STA-024.
       responses:
         '200':
           description: OK
@@ -19,41 +20,20 @@ paths:
 
 components:
   schemas:
-    subscribeResponseStatusCode:
-      description: The statusCode element is a 3-digit integer result code of the attempt to understand and satisfy the request
-      type: integer
-      enum:
-        - 200
-        - 400
-        - 404
-        - 413
-        - 481
-        - 500
-        - 503
-    notificationResponseStatusCode:
-      description: Status code of response according to the request
-      type: integer
-      enum:
-        - 200
-        - 400
-        - 404
-        - 413
-        - 481
-        - 500
-        - 501
-        - 503
 
     subscriberMessage:
       oneOf:
         - $ref: '#/components/schemas/subscribeObject'
         - $ref: '#/components/schemas/unsubscribeObject'
         - $ref: '#/components/schemas/eventResponseObject'
+        - $ref: '#/components/schemas/terminateResponseObject'
     notifierMessage:
       oneOf:
         - $ref: '#/components/schemas/subscribeResponseObject'
         - $ref: '#/components/schemas/unsubscribeResponseObject'
         - $ref: '#/components/schemas/responseObject'
         - $ref: '#/components/schemas/eventObject'
+        - $ref: '#/components/schemas/terminateObject'
 
     subscribeObject:
       type: object
@@ -124,10 +104,21 @@ components:
               type: integer
               description: Subscription period in seconds relative to the notifier’s establishment or renewal of the subscription.
             statusCode:
-              $ref: '#/components/schemas/subscribeResponseStatusCode'
+              description: The statusCode element is a 3-digit integer result code of the attempt to understand and satisfy the request
+              type: integer
+              enum: 
+                - 200
+                - 400
+                - 403
+                - 404
+                - 406
+                - 413
+                - 481
+                - 500
+                - 503
             statusText:
-              type: string
               description: The statusText provides a short textual description related to the  statusCode.
+              type: string
             qualFilterEvalPeriod:
               type: integer
               description: If qualFilter specified, a positive integer specifying the requested number of seconds between qualFilter evaluations.
@@ -166,7 +157,15 @@ components:
               type: string
               description: Globally unique identifier for the subscription.
             statusCode:
-              $ref: '#/components/schemas/subscribeResponseStatusCode'
+              description: The statusCode element is a 3-digit integer result code of the attempt to understand and satisfy the request
+              type: integer
+              enum:
+                - 200
+                - 400
+                - 413
+                - 481
+                - 500
+                - 503
             statusText:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
@@ -226,7 +225,17 @@ components:
               type: string
               description: GUID used to identify a transaction for acknowledgement.
             statusCode:
-              $ref: '#/components/schemas/notificationResponseStatusCode'
+              description: Status code of response according to the request
+              type: integer
+              enum:
+                - 200
+                - 400
+                - 404
+                - 413
+                - 481
+                - 500
+                - 501
+                - 503
             statusText:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
@@ -265,7 +274,15 @@ components:
               type: string
               description: Subscription being terminated.
             statusCode:
-              $ref: '#/components/schemas/subscribeResponseStatusCode'
+              description: The statusCode element is a 3-digit integer result code of the attempt to understand and satisfy the request
+              type: integer
+              enum:
+                - 200
+                - 400
+                - 481
+                - 500
+                - 501
+                - 503
             statusText:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
