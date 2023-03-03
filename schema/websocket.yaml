@@ -48,12 +48,14 @@ components:
         - $ref: '#/components/schemas/subscribeObject'
         - $ref: '#/components/schemas/unsubscribeObject'
         - $ref: '#/components/schemas/eventResponseObject'
+        - $ref: '#/components/schemas/terminateResponseObject'
     notifierMessage:
       oneOf:
         - $ref: '#/components/schemas/subscribeResponseObject'
         - $ref: '#/components/schemas/unsubscribeResponseObject'
         - $ref: '#/components/schemas/responseObject'
         - $ref: '#/components/schemas/eventObject'
+        - $ref: '#/components/schemas/terminateObject'
 
     subscribeObject:
       type: object
@@ -132,7 +134,13 @@ components:
       properties:
         unsubscribe:
           type: object
+          required:
+            - requestId
+            - subscriptionId
           properties:
+            requestId:
+              type: string
+              description: The ID provided by the subscriber.
             subscriptionId:
               type: string
               description: The subscriptionId sent by the service.
@@ -143,6 +151,9 @@ components:
         unsubscribeResponse:
           type: object
           properties:
+            requestId:
+              type: string
+              description: The ID provided by the subscriber.
             subscriptionId:
               type: string
               description: Globally unique identifier for the subscription.
@@ -198,6 +209,43 @@ components:
             transactionId:
               type: string
               description: GUID used to identify a transaction for acknowledgement.
+            statusCode:
+              $ref: '#/components/schemas/notificationResponseStatusCode'
+            statusText:
+              type: string
+              description: The statusText is intended to provide information related to the statusCode.
+
+    terminateObject:
+      type: object
+      properties:
+        terminate:
+          type: object
+          required:
+            - requestId
+            - subscriptionId
+          properties:
+            requestId:
+              type: string
+              description: The ID provided by the notifier.
+            subscriptionId:
+              type: string
+              description: Subscription being terminated.
+
+   terminateResponseObject:
+      type: object
+      required:
+        - requestId
+        - subscriptionId
+      properties:
+        terminateResponse:
+          type: object
+          properties:
+            requestId:
+              type: string
+              description: The ID provided by the notifier.
+            subscriptionId:
+              type: string
+              description: Subscription being terminated.
             statusCode:
               $ref: '#/components/schemas/notificationResponseStatusCode'
             statusText:
