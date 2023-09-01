@@ -406,3 +406,5 @@ components:
             emergencyResourceComponent:
               type: array
               description: An array of EmergencyResourceType objects as defined in NENA-STA-021.1a-2021.
+              items:
+                type: object #EmergencyResourceType
