@@ -17,6 +17,7 @@ paths:
                  - $ref: '#/components/schemas/subscriberMessage'
                  - $ref: '#/components/schemas/notifierMessage'
                  - $ref: '#/components/schemas/pushMessage'
+                 - $ref: '#/components/schemas/discoverMessage'
 
 components:
   schemas:
