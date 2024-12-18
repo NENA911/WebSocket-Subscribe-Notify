@@ -287,39 +287,3 @@ components:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
 
-    terminateObject:
-      type: object
-      properties:
-        terminate:
-          type: object
-          required:
-            - requestId
-            - subscriptionId
-          properties:
-            requestId:
-              type: string
-              description: The ID provided by the notifier.
-            subscriptionId:
-              type: string
-              description: Subscription being terminated.
-
-   terminateResponseObject:
-      type: object
-      required:
-        - requestId
-        - subscriptionId
-      properties:
-        terminateResponse:
-          type: object
-          properties:
-            requestId:
-              type: string
-              description: The ID provided by the notifier.
-            subscriptionId:
-              type: string
-              description: Subscription being terminated.
-            statusCode:
-              $ref: '#/components/schemas/notificationResponseStatusCode'
-            statusText:
-              type: string
-              description: The statusText is intended to provide information related to the statusCode.
