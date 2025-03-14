@@ -261,7 +261,7 @@ components:
             statusText:
               type: string
               description: The statusText is intended to provide information related to the statusCode.
-
+              
     terminateObject:
       type: object
       properties:
@@ -354,6 +354,11 @@ components:
       properties:
         requestAwarenes:
           type: object
+          required:
+            - requestId
+            - subscriptionId
+            - statusCode
+            - statusText
           properties:
               requestId:
                 type: string
