@@ -350,7 +350,7 @@ components:
       type: object
       required:
         - requestId
-        - edio
+        - eido
       properties:
         requestAwarenes:
           type: object
