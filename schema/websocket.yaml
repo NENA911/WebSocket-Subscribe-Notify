@@ -313,7 +313,7 @@ components:
       type: object
       required:
         - requestId
-        - edio
+        - eido
       properties:
         requestForService:
           type: object
